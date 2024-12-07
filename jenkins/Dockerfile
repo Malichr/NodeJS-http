@@ -9,4 +9,6 @@ ENV JENKINS_HOME /var/jenkins_home
 VOLUME /var/jenkins_home
 
 # Docker socket elérhetőség
-RUN groupadd -g 999 docker && usermod -aG docker jenkins
+RUN if ! getent group docker; then \
+        groupadd -g 999 docker; \
+    fi && usermod -aG docker jenkins
