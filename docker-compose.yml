@@ -3,30 +3,30 @@ version: "3.8"
 services:
   node-app:
     build:
-      context: .
+      context: .  # A build kontextus
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
     networks:
-      - app-network
+      - app-network  # A hálózat, amelyhez csatlakozik
 
   jenkins:
     build:
-      context: ./jenkins
+      context: ./jenkins  # A Jenkins build kontextusa
     ports:
       - "8080:8080"
-      - "50000:50000" # Jenkins agent kommunikáció
+      - "50000:50000"  # Jenkins agent kommunikáció portja
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock # Docker socket a hostról
+      - /var/run/docker.sock:/var/run/docker.sock  # Docker socket a hostról
     networks:
-      - app-network
+      - app-network  # A hálózat, amelyhez csatlakozik
 
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # A Prometheus konfigurációs fájl
     ports:
       - "9090:9090"
     networks:

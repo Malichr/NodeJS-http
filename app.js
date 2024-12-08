@@ -10,7 +10,6 @@ const server = http.createServer((req, res) => {
   // URL feldolgozása
   const queryObject = url.parse(req.url, true).query;
 
-  // Ellenőrizzük, van-e megadott "text" paraméter
   if (!queryObject.text) {
     res.statusCode = 400;
     res.setHeader('Content-Type', 'text/plain');
@@ -18,9 +17,8 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Szöveg fordítása
   const inputText = queryObject.text;
-  const reversedText = inputText.split('').reverse().join('');
+  const reversedText = inputText.split('').reverse().join('');  // A szöveg megfordítása
 
   // Válasz küldése
   res.statusCode = 200;
